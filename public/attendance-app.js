@@ -767,9 +767,9 @@
           adminUnlocked = !!data.adminAuthenticated;
           syncDerivedData();
 
-          const latest = allRows[0]?._date || new Date();
-          viewYear = latest.getFullYear();
-          viewMonth = latest.getMonth();
+          const today = new Date();
+          viewYear = today.getFullYear();
+          viewMonth = today.getMonth();
           $("loading").style.display = "none";
           $("app").style.display = "block";
           renderAll();
