@@ -538,6 +538,9 @@
         flex-direction: column;
         gap: 5px;
         margin-bottom: 10px;
+        max-height: min(34vh, 320px);
+        overflow-y: auto;
+        padding-right: 4px;
       }
       .leave-item {
         display: flex;
