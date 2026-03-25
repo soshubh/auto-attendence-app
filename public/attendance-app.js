@@ -977,7 +977,7 @@
           if (isLeave && !other) {
             const lb = document.createElement("div");
             lb.className = `leave-badge${isRecurringLeave ? " recurring" : ""}`;
-            lb.textContent = leaveCategory || "Weekly Off";
+            lb.textContent = leaveCategory || (window.matchMedia("(max-width: 600px)").matches ? "Off" : "Weekly Off");
             cell.appendChild(lb);
           } else if (isWfh && !other) {
             const wb = document.createElement("div");
