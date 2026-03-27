@@ -55,6 +55,28 @@
         return found ? found.category || "" : "";
       }
 
+      function getLeaveBadgeText(category, isRecurringLeave) {
+        if (isRecurringLeave) {
+          return window.matchMedia("(max-width: 600px)").matches ? "Off" : "Weekly Off";
+        }
+
+        if (!window.matchMedia("(max-width: 600px)").matches) {
+          return category;
+        }
+
+        const mobileLabels = {
+          "Earned Leave": "E Leave",
+          "Casual Leave": "C Leave",
+          "Sick Leave": "Sick",
+          "Compensatory Off": "C Off",
+          "Public Holidays": "Holiday",
+          "Restricted Holidays": "R Holiday",
+          "Loss of Pay (LOP)": "LOP",
+        };
+
+        return mobileLabels[category] || category;
+      }
+
       function isRecurringLeaveDay(dateObj) {
         const record = getSpecificLeaveRecord(dateKey(dateObj));
         return isLeaveDay(dateObj) && (!record || !record.category);
@@ -977,7 +999,7 @@
           if (isLeave && !other) {
             const lb = document.createElement("div");
             lb.className = `leave-badge${isRecurringLeave ? " recurring" : ""}`;
-            lb.textContent = leaveCategory || (window.matchMedia("(max-width: 600px)").matches ? "Off" : "Weekly Off");
+            lb.textContent = getLeaveBadgeText(leaveCategory, isRecurringLeave);
             cell.appendChild(lb);
           } else if (isWfh && !other) {
             const wb = document.createElement("div");
